@@ -1,7 +1,7 @@
-# khagendrapoudel
+#khagendrapoudel.com
 
-Site under construction.
+This website was built to showcase how cool I am to my friends. Nothing more.
 
-This is my very first project I am doing in my free time while learning Bootstrap.
+Thank you for wasting your time.
 
 
