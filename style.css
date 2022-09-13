@@ -39,3 +39,61 @@ h1{
 span{
     color: rgb(217, 255, 0);
 }
+
+
+/* Childrens day css from here. */
+
+
+#banner > img{
+    width: 1000px;
+    height: auto;
+      
+}
+
+
+#banner{
+    display: grid;
+    place-items: center;
+    margin-top: 50px; 
+}
+
+#intro{
+    margin-top: 100px;
+}
+
+pre{
+    
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+}
+
+h2{
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.idiots > img{
+    margin: 10px;
+
+}
+
+.idiots{
+    display: grid;
+    place-items: center;
+    margin-top: 50px; 
+}
+
+.good > img{
+    margin: 10px;
+    height: 400px;
+}
+
+.good{
+    display: grid;
+    place-items: center;
+    margin-top: 50px; 
+    
+}
