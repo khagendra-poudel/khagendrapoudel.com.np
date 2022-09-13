@@ -55,16 +55,7 @@ h2{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.idiots > img{
-    margin: 10px;
 
-}
-
-.idiots{
-    display: grid;
-    place-items: center;
-    margin-top: 50px; 
-}
 
 .good > img{
     margin: 10px;
