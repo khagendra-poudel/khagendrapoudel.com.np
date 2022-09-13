@@ -54,3 +54,23 @@ h2{
     margin-top: 50px; 
     
 }
+span{
+    color: rgb(217, 255, 0);
+}
+h1{
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+a{
+    color: white;
+    margin: 20px;
+    margin-top: 70px;
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(0, 0, 0);
+    
+}
