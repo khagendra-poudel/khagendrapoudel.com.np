@@ -20,6 +20,12 @@ body{
     
 }
 
+.centerText{
+    height: 30px;
+    font-family: "Playwrite NL";
+    text-align: center;
+}
+
 a{
     color: white;
     margin: 20px;
@@ -54,7 +60,8 @@ ul {
 
 li{
    font-size: medium;
-   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   font-weight: bold;
 }
 
 a{
@@ -63,6 +70,8 @@ a{
 
 a:hover{
     text-decoration: underline 5px yellow;
+    color: yellow;
+    
     
 }
  
