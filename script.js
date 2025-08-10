@@ -326,7 +326,10 @@ const additionalStyles = `
   }
 `;
 
-// Inject additional styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
+// Inject additional styles (only if not already injected)
+if (!document.getElementById('script-additional-styles')) {
+  const styleSheet = document.createElement('style');
+  styleSheet.id = 'script-additional-styles';
+  styleSheet.textContent = additionalStyles;
+  document.head.appendChild(styleSheet);
+}
