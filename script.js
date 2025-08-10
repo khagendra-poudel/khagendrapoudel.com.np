@@ -263,7 +263,7 @@ class PerformanceOptimizer {
   }
 
   setupImageOptimization() {
-    const images = document.querySelectorAll('img');
+    const images = document.querySelectorAll('img:not(#profileImage)');
     images.forEach(img => {
       img.addEventListener('load', () => {
         img.style.opacity = '1';
@@ -287,6 +287,29 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add loading animation
   document.body.classList.add('loaded');
+  
+  // Handle profile image error
+  const profileImage = document.getElementById('profileImage');
+  
+  if (profileImage) {
+    console.log('Profile image found:', profileImage);
+    console.log('Profile image src:', profileImage.src);
+    
+    profileImage.addEventListener('load', function() {
+      console.log('Profile image loaded successfully!');
+    });
+    
+    profileImage.addEventListener('error', function() {
+      console.log('Profile image failed to load, showing fallback');
+      this.style.display = 'none';
+      const fallback = document.createElement('div');
+      fallback.style.cssText = 'width: 180px; height: 180px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; border: 4px solid #6366f1; box-shadow: 0 10px 25px rgba(0,0,0,0.2);';
+      fallback.innerHTML = '<i class="fas fa-user"></i>';
+      this.parentElement.appendChild(fallback);
+    });
+  } else {
+    console.log('Profile image element not found');
+  }
 });
 
 // Handle page visibility changes for better performance
