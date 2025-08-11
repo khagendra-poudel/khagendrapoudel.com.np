@@ -92,11 +92,42 @@
 .login-footer {
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .login-footer p {
   color: var(--text-muted);
   font-size: 0.85rem;
+  margin: 0;
+}
+
+.back-to-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-secondary);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.back-to-home-btn:hover {
+  color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-1px);
+}
+
+.back-to-home-btn i {
+  color: var(--primary-color);
 }
 
 /* Dashboard Content Wrapper */

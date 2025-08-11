@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Khagendra Poudel - Games">
+  <title>Games - Khagendra Poudel</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="./assets/profile.jpg" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/9802b70301.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="notes.html" class="nav-link">Notes</a></li>
+        <li><a href="games.html" class="nav-link active">Games</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-title">Games</h1>
+        <p class="page-subtitle">Fun and interactive games built with HTML, CSS, and JavaScript</p>
+      </div>
+    </section>
+
+    <section class="games-section">
+      <div class="container">
+        <!-- Games Grid -->
+        <div class="games-grid">
+          <!-- Snake Game Card -->
+          <article class="game-card" id="snakeGameCard">
+            <div class="game-image">
+              <div class="game-placeholder">
+                <i class="fas fa-gamepad"></i>
+              </div>
+              <div class="game-overlay">
+                <a href="snake-game.html" target="_blank" class="play-btn">
+                  <i class="fas fa-play"></i>
+                  Play Now
+                </a>
+              </div>
+            </div>
+            <div class="game-content">
+              <h3 class="game-title">Snake Game</h3>
+              <p class="game-description">
+                Classic Snake game where you control a growing snake to eat food while avoiding walls and your own tail.
+                Use arrow keys to move and try to get the highest score!
+              </p>
+              <div class="game-tech">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Canvas</span>
+              </div>
+              <div class="game-stats">
+                <div class="stat">
+                  <i class="fas fa-trophy"></i>
+                  <span>High Score: <span id="snakeHighScore">0</span></span>
+                </div>
+                <div class="stat">
+                  <i class="fas fa-clock"></i>
+                  <span>Best Time: <span id="snakeBestTime">--</span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Placeholder for future games -->
+          <article class="game-card coming-soon">
+            <div class="game-image">
+              <div class="game-placeholder">
+                <i class="fas fa-puzzle-piece"></i>
+              </div>
+            </div>
+            <div class="game-content">
+              <h3 class="game-title">Tetris</h3>
+              <p class="game-description">
+                Classic block-stacking puzzle game. Coming soon!
+              </p>
+              <div class="game-tech">
+                <span class="tech-tag">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card coming-soon">
+            <div class="game-image">
+              <div class="game-placeholder">
+                <i class="fas fa-chess"></i>
+              </div>
+            </div>
+            <div class="game-content">
+              <h3 class="game-title">Chess</h3>
+              <p class="game-description">
+                Strategic chess game with AI opponent. Coming soon!
+              </p>
+              <div class="game-tech">
+                <span class="tech-tag">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Snake Game Modal -->
+    <div class="game-modal" id="snakeGameModal">
+      <div class="game-modal-content">
+        <div class="game-modal-header">
+          <h3>Snake Game</h3>
+          <div class="game-controls">
+            <button class="btn btn-small" id="pauseBtn">
+              <i class="fas fa-pause"></i>
+              Pause
+            </button>
+            <button class="btn btn-small" id="restartBtn">
+              <i class="fas fa-redo"></i>
+              Restart
+            </button>
+            <button class="modal-close" onclick="closeSnakeGame()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="game-modal-body">
+          <div class="game-info">
+            <div class="game-score">
+              <span>Score: <span id="currentScore">0</span></span>
+            </div>
+            <div class="game-level">
+              <span>Level: <span id="currentLevel">1</span></span>
+            </div>
+          </div>
+          <!-- Snake Game Integration -->
+          <div id="snakeGameContainer">
+            <!-- Snake Game Overlay Menu -->
+            <div id="overlay">
+              <div id="menuMain" class="menuCard active">
+                <div class="menuTitle">Snake</div>
+                <div class="menuSubtitle">Eat food, avoid yourself, and score big!</div>
+                <button id="btnPlay" class="menuBtn">Play</button>
+                <button id="btnOpenLeaderboard" class="menuBtn menuSecondary">Leaderboard</button>
+                <button id="btnHowTo" class="menuBtn menuTertiary">How to Play</button>
+              </div>
+              <div id="menuLeaderboard" class="menuCard">
+                <div class="menuTitle">Top Scores</div>
+                <ul id="overlayLeaderboard" class="menuList"></ul>
+                <button class="menuBtn menuBack" data-back>Back</button>
+              </div>
+              <div id="menuGameOver" class="menuCard">
+                <div class="menuTitle">Game Over</div>
+                <p class="menuSubtitle" id="finalScore">Your score: 0</p>
+                <input id="playerNameOverlay" type="text" placeholder="Enter your name" maxlength="20" class="menuInput" />
+                <button id="btnSubmitScore" class="menuBtn">Submit Score</button>
+                <button class="menuBtn menuBack" data-back>Back</button>
+              </div>
+              <div id="menuHow" class="menuCard">
+                <div class="menuTitle">How to Play</div>
+                <ul class="menuList">
+                  <li>Use Arrow Keys to move.</li>
+                  <li>Eat red food to grow and gain +1 point.</li>
+                  <li>Every 5 foods, a golden bonus appears. Eat it for +10.</li>
+                  <li>Wrapping is enabled. Don't collide with yourself.</li>
+                </ul>
+                <button class="menuBtn menuBack" data-back>Back</button>
+              </div>
+            </div>
+            
+            <!-- Game Container -->
+            <div id="gameContainer">
+              <div>
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+              </div>
+              <div id="sidePanel">
+                <div id="score">Score: 0</div>
+                <div id="leaderboardTitle">Leaderboard</div>
+                <ul id="leaderboard"></ul>
+                <button id="resetLeaderboard">Reset Leaderboard</button>
+                <div id="bonusLabel" style="display:none;">Bonus Active!</div>
+                <div id="bonusBarContainer" style="display:none;">
+                  <div id="bonusBar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="game-instructions">
+            <h4>How to Play:</h4>
+            <ul>
+              <li>Use arrow keys (↑↓←→) or WASD to control the snake</li>
+              <li>Eat the red food to grow and increase your score</li>
+              <li>Avoid hitting the walls or your own tail</li>
+              <li>The game gets faster as your score increases</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khagendra Poudel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="leaderboard.js"></script>
+  <script src="snake.js"></script>
+  <script>
+    // Snake game modal functions
+    function openSnakeGame() {
+      document.getElementById('snakeGameModal').style.display = 'flex';
+      // Initialize snake game
+      if (typeof initializeSnakeGame === 'function') {
+        initializeSnakeGame();
+      }
+      updateSnakeHighScores();
+    }
+
+    function closeSnakeGame() {
+      document.getElementById('snakeGameModal').style.display = 'none';
+      // Clean up game state
+      if (typeof cleanupSnakeGame === 'function') {
+        cleanupSnakeGame();
+      }
+    }
+
+    // Function to update high scores on the games page
+    function updateSnakeHighScores() {
+      if (typeof Leaderboard !== 'undefined') {
+        const leaderboard = Leaderboard.getLeaderboard();
+        const highScore = leaderboard.length > 0 ? leaderboard[0].score : 0;
+        
+        const highScoreEl = document.getElementById('snakeHighScore');
+        if (highScoreEl) {
+          highScoreEl.textContent = highScore;
+        }
+      }
+    }
+
+    // Load high scores from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      updateSnakeHighScores();
+      
+      // Update periodically
+      setInterval(updateSnakeHighScores, 2000);
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('snakeGameModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSnakeGame();
+      }
+    });
+
+    // Escape key to close modal
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('snakeGameModal').style.display === 'flex') {
+        closeSnakeGame();
+      }
+    });
+  </script>
+</body>
+</html>
