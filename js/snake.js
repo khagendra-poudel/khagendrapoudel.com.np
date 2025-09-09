@@ -22,8 +22,33 @@ const playerNameOverlayInput = document.getElementById("playerNameOverlay");
 const btnSubmitScore = document.getElementById("btnSubmitScore");
 
 const gridSize = 20;
-const initialCanvasSize = 400;
-const maxCanvasSize = 800; // cap growth to avoid overflow
+// Responsive canvas sizing
+function getViewportWidth() {
+    return Math.min(window.innerWidth || 0, document.documentElement.clientWidth || 0) || window.innerWidth;
+}
+
+function getAvailableWidth() {
+    // Account for modal paddings/margins roughly
+    const padding = 64; // px
+    return Math.max(240, getViewportWidth() - padding);
+}
+
+function roundToGrid(px) {
+    return Math.max(gridSize * 10, Math.floor(px / gridSize) * gridSize); // at least 10 cells
+}
+
+function getInitialCanvasSize() {
+    // Prefer 400 but clamp to available width on mobile
+    return Math.min(400, roundToGrid(getAvailableWidth()));
+}
+
+function getMaxCanvasSize() {
+    // Cap by 800 and by available width (to avoid overflow on mobile)
+    return Math.min(800, roundToGrid(getAvailableWidth()));
+}
+
+let initialCanvasSize = getInitialCanvasSize();
+let maxCanvasSize = getMaxCanvasSize(); // cap growth to avoid overflow
 const foodsPerExpand = 5;  // expand every N foods
 const expandStep = gridSize * 2; // grow by 2 cells each time
 let currentCanvasSize = initialCanvasSize;
@@ -450,7 +475,9 @@ function startNewRun() {
     bonusActive = false;
     bonusLabel.style.display = "none";
     bonusBarContainer.style.display = "none";
-    // Reset canvas size and cancel any size animation
+    // Recompute responsive sizes and reset canvas
+    initialCanvasSize = getInitialCanvasSize();
+    maxCanvasSize = getMaxCanvasSize();
     currentCanvasSize = initialCanvasSize;
     targetCanvasSize = initialCanvasSize;
     resizeAnimId += 1;
@@ -466,7 +493,14 @@ function startNewRun() {
 // Global function to be called when opening the game modal
 function initializeSnakeGame() {
     if (canvas && ctx) {
-        startNewRun();
+    // Re-evaluate sizes on open
+    initialCanvasSize = getInitialCanvasSize();
+    maxCanvasSize = getMaxCanvasSize();
+    currentCanvasSize = initialCanvasSize;
+    targetCanvasSize = initialCanvasSize;
+    canvas.width = initialCanvasSize;
+    canvas.height = initialCanvasSize;
+    startNewRun();
         const gameInterval = setInterval(gameLoop, 120);
         
         // Store interval ID to clear it when modal closes
@@ -488,6 +522,27 @@ function cleanupSnakeGame() {
     gameStarted = false;
     menuVisible = true;
 }
+
+// Handle viewport resize/orientation changes
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    // Debounce rapid resize
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const newInitial = getInitialCanvasSize();
+        const newMax = getMaxCanvasSize();
+        initialCanvasSize = newInitial;
+        maxCanvasSize = newMax;
+        // Clamp current/target to new max
+        currentCanvasSize = Math.min(currentCanvasSize, maxCanvasSize);
+        targetCanvasSize = Math.min(targetCanvasSize, maxCanvasSize);
+        // If current is larger than available, shrink immediately
+        if (canvas.width !== currentCanvasSize || canvas.height !== currentCanvasSize) {
+            canvas.width = currentCanvasSize;
+            canvas.height = currentCanvasSize;
+        }
+    }, 150);
+});
 
 // Function to update the website's score displays
 function updateWebsiteScoreDisplay() {
