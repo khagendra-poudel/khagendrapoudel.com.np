@@ -566,11 +566,7 @@ body::before {
   }
 }
 
-/* Active Navigation State */
-.nav-link.active {
-  color: var(--text-primary);
-  background: rgba(99, 102, 241, 0.2);
-}
+/* Active Navigation State: underline only handled by ::after */
 
 .nav-link.active::after {
   width: 80%;
@@ -717,6 +713,47 @@ body::before {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2rem;
+}
+
+/* Blog Refresh Button */
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.refresh-btn:hover {
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.refresh-btn i {
+  transition: transform 0.6s ease;
+}
+
+.refresh-btn:hover i {
+  transform: rotate(180deg);
+}
+
+.refresh-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .blog-grid {
